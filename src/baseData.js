@@ -32,20 +32,20 @@ window.app.baseData = window.app.baseData || {};
 
 	baseData.tax.brackets = {
 		2017: {
-			fed: {
-				0: 0.15,
-				45917: 0.205,
-				91832: 0.26,
-				142354: 0.29,
-				202801: 0.33
-			},
-			on: {
-				0: 0.0505,
-				42201: 0.0915,
-				84405: 0.1116,
-				150001: 0.1216,
-				220001: 0.1316
-			}
+			fed: [
+				{start: 0, end: 45916, rate: 0.15},
+				{start: 45917, end: 91831, rate: 0.205},
+				{start: 91832, end: 142353, rate: 0.26},
+				{start: 142354, end: 202800, rate: 0.29},
+				{start: 202801, end: Infinity, rate: 0.33}
+			],
+			on: [
+				{start: 0, end: 42200, rate: 0.0505},
+				{start: 42201, end: 84404, rate: 0.0915},
+				{start: 84405, end: 150000, rate: 0.1116},
+				{start: 150001, end: 220000, rate: 0.1216},
+				{start: 220001, end: Infinity, rate: 0.1316}
+			]
 		}
 	}
 
@@ -82,23 +82,23 @@ window.app.baseData = window.app.baseData || {};
 				employmentAmount: 1177
 			},
 			on: {
-				healthprem: {
-					0: 0,
-					20001: (incomeTaxable) => { return (incomeTaxable - 20000) * 0.06},
-					25001: (incomeTaxable) => { return 300 },
-					36001: (incomeTaxable) => { return 300 + (incomeTaxable - 36000) * 0.06},
-					38501: (incomeTaxable) => { return 450 },
-					48001: (incomeTaxable) => { return 450 + (incomeTaxable - 48000) * 0.25},
-					48601: (incomeTaxable) => { return 600 },
-					72001: (incomeTaxable) => { return 600 + (incomeTaxable - 72000) * 0.25},
-					72601: (incomeTaxable) => { return 750 },
-					200001: (incomeTaxable) => { return 750 + (incomeTaxable - 200000) * 0.25},
-					200601: (incomeTaxable) => { return 900 },
-				},
-				surtax: {
-					4556: 0.2,
-					5831: 0.36
-				},
+				healthprem: [
+					{start: 0, end: 20000, amount: (incomeTaxable) => { return 0; }},
+					{start: 20001, end: 25000, amount: (incomeTaxable) => { return (incomeTaxable - 20000) * 0.06}},
+					{start: 25001, end: 36000, amount: (incomeTaxable) => { return 300 }},
+					{start: 36001, end: 38500, amount: (incomeTaxable) => { return 300 + (incomeTaxable - 36000) * 0.06}},
+					{start: 38501, end: 48000, amount: (incomeTaxable) => { return 450 }},
+					{start: 48001, end: 48600, amount: (incomeTaxable) => { return 450 + (incomeTaxable - 48000) * 0.25}},
+					{start: 48601, end: 72000, amount: (incomeTaxable) => { return 600 }},
+					{start: 72001, end: 72600, amount: (incomeTaxable) => { return 600 + (incomeTaxable - 72000) * 0.25}},
+					{start: 72601, end: 200000, amount: (incomeTaxable) => { return 750 }},
+					{start: 200001, end: 200600, amount: (incomeTaxable) => { return 750 + (incomeTaxable - 200000) * 0.25}},
+					{start: 200601, end: Infinity, amount: (incomeTaxable) => { return 900 }}
+				],
+				surtax: [
+					{start: 4557, rate: 0.2},
+					{start: 5832, rate: 0.36}
+				],
 				taxReduction: 231
 			}
 		}

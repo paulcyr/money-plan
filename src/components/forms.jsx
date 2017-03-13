@@ -85,8 +85,8 @@ export class ConditionsForm extends Component {
       ));
     
     this.state = {
-      dob: global.util.dateToIetfDate(dob),
-      prov: (typeof this.props.prov === 'string') ? this.props.prov : '––'
+      //dob: global.util.dateToIetfDate(dob),
+      //prov: (typeof this.props.prov === 'string') ? this.props.prov : '––'
     }
   }
 
