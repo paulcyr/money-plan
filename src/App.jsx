@@ -7,6 +7,8 @@ import Footer from './views/Footer';
 
 require('./baseData');
 require('./defaultValues');
+require('./calc');
+require('./main');
 
 class App extends Component {
   render() {

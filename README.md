@@ -1,1 +1,1 @@
-# MoneyTool
+# money-tool

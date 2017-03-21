@@ -11,11 +11,11 @@ window.app.calc = window.app.calc || {};
 		let current = Number.parseInt(
 			(new Date()).getUTCFullYear()
 			+ ('0' + (new Date().getUTCMonth() + 1)).slice(-2)
-		);
+		,10);
 		if (yearMonth < current) throw new RangeError();
 		if (current === yearMonth) return 1;
-		let prevYearMonth = yearMonth % 100 == 1
-			? (Number.parseInt(yearMonth/100)-1)*100+12
+		let prevYearMonth = yearMonth % 100 === 1
+			? (Number.parseInt(yearMonth/100, 10)-1)*100+12
 			: yearMonth - 1;
 		let result = (1+(inflationAnnual/12)) * calc.priceIndex(prevYearMonth, inflationAnnual);
 		return result;
@@ -57,12 +57,12 @@ window.app.calc = window.app.calc || {};
 		if (!(credits instanceof Array)) throw new TypeError();
 
 		let net = payable.reduce((acc, val) => {
-			if (typeof val != 'number') throw new TypeError(); 
+			if (typeof val !== 'number') throw new TypeError(); 
 			return acc + val;
 		}, 0);
 
 		net -= credits.reduce((acc, val) => {
-			if (typeof val != 'number') throw new TypeError(); 
+			if (typeof val !== 'number') throw new TypeError(); 
 			return acc + val;
 		}, 0);
 
@@ -75,7 +75,7 @@ window.app.calc = window.app.calc || {};
 			if (!(healthPremiumBrackets instanceof Array)) throw new TypeError();
 
 			for (let i=0; i < healthPremiumBrackets.length; i++) {
-				if (typeof healthPremiumBrackets[i] != 'object') throw new TypeError();
+				if (typeof healthPremiumBrackets[i] !== 'object') throw new TypeError();
 				if (incomeAnnualTaxable >= healthPremiumBrackets[i].start && incomeAnnualTaxable <= healthPremiumBrackets[i].end) {
 					return Math.round(healthPremiumBrackets[i].amount(incomeAnnualTaxable)*100)/100;
 				}

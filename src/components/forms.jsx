@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-export class PersonalInfoForm extends Component {
+export default class PersonalInfoForm extends Component {
   constructor(props) {
     super(props);
 
@@ -38,7 +38,7 @@ export class PersonalInfoForm extends Component {
     if (typeof this.state !== 'object') this.state = {};
     
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <label htmlFor="dob">
           <FormattedMessage id="dob" defaultMessage={`Date of Birth:`} />
         </label>
@@ -67,7 +67,7 @@ export class PersonalInfoForm extends Component {
   }
 }
 
-export class ConditionsForm extends Component {
+export class BalancesForm extends Component {
   constructor(props) {
     super(props);
 
@@ -85,8 +85,12 @@ export class ConditionsForm extends Component {
       ));
     
     this.state = {
-      //dob: global.util.dateToIetfDate(dob),
-      //prov: (typeof this.props.prov === 'string') ? this.props.prov : '––'
+      bank: (typeof this.props.bank === 'number') ? this.props.bank : 0,
+      tfsa: (typeof this.props.bank === 'number') ? this.props.tfsa : 0,
+      dcpp: (typeof this.props.bank === 'number') ? this.props.dcpp : 0,
+      rrsp: (typeof this.props.bank === 'number') ? this.props.rrsp : 0,
+      lira: (typeof this.props.bank === 'number') ? this.props.lira : 0,
+      lif: (typeof this.props.bank === 'number') ? this.props.lif : 0, 
     }
   }
 
@@ -104,30 +108,15 @@ export class ConditionsForm extends Component {
     if (typeof this.state !== 'object') this.state = {};
     
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="dob">
-          <FormattedMessage id="dob" defaultMessage={`Date of Birth:`} />
+      <form>
+        <label htmlFor="bank">
+          <FormattedMessage id="bank" defaultMessage={`Bank (Savings)`} />
         </label>
-        <input name="dob" type="date" defaultValue={this.state.dob} value={this.state.value} max={global.util.dateToIetfDate(new Date())} onChange={this.handleChange} />
-        <label htmlFor="prov">
-          <FormattedMessage id="prov" defaultMessage={`Province:`} />
+        <input name="bank" type="number" min="0" step="0.01" value={this.state.value} onChange={this.handleChange} />
+        <label htmlFor="tfsa">
+          <FormattedMessage id="tfsa" defaultMessage={`TFSA`} />
         </label>
-        <select name="prov" defaultValue={this.state.prov} value={this.state.value} onChange={this.handleChange} >
-          <option value="––" disabled>––</option>
-          <option value="ab">AB</option>
-          <option value="bc">BC</option>
-          <option value="mb">MB</option>
-          <option value="nb">NB</option>
-          <option value="nl">NL</option>
-          <option value="ns">NS</option>
-          <option value="nt">NT</option>
-          <option value="nu">NU</option>
-          <option value="on">ON</option>
-          <option value="pe">PE</option>
-          <option value="qc">QC</option>
-          <option value="sk">SK</option>
-          <option value="yt">YT</option>
-        </select>
+        <input name="tfsa" type="number" min="0" step="0.01" value={this.state.value} onChange={this.handleChange} />
       </form>
     );
   }
