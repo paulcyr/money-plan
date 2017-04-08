@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PersonalInfoForm from '../../components/forms';
+import PersonalInfoForm from '../../components/PersonalInfoForm';
 
 class Input extends Component {
   render() {

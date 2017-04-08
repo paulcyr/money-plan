@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import PersonalInformationForm, {BalancesForm} from '../../components/forms';
+import PersonalInformationForm from '../../components/PersonalInfoForm';
+import BalancesForm from '../../components/BalancesForm';
 
-class Settings extends Component {
+export default class Settings extends Component {
   render() {
+    console.log(this.props)
     return (
       <div className="settings">
-        <PersonalInformationForm />
+        <PersonalInformationForm dob={this.props.settings.get('dob')}/>
         <BalancesForm />
       </div>
     );
   }
 }
-
-export default Settings;

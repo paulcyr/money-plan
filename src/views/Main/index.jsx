@@ -5,9 +5,10 @@ import Output from '../Output';
 
 class Main extends Component {
   render() {
+    console.log(this.props)
     return (
       <main id="main" role="main">
-        <Settings />
+        <Settings settings={this.props.data.settings} />
         <Input />
         <Output />
       </main>

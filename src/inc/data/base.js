@@ -1,11 +1,14 @@
-window.app = window.app || {};
-window.app.baseData = window.app.baseData || {};
+let app = window.app || {};
+let data;
 
-(function() {
+if (app.hasOwnProperty('data')) data = window.app.data;
+else data = window.app.data = {};
+
+data.base = (function() {
 	
-	var baseData = window.app.baseData;
+	let base = {};
 
-	baseData.inflation = {
+	base.inflation = {
 		1997: { cpi: 90.4, pctchg: 1.7 },
 		1998: { cpi: 91.3, pctchg: 1 },
 		1999: { cpi: 92.9, pctchg: 1.8 },
@@ -28,9 +31,9 @@ window.app.baseData = window.app.baseData || {};
 		2016: { cpi: 128.4, pctchg: 1.4 },
 	}
 
-	baseData.tax = baseData.tax || {};
+	base.tax = {};
 
-	baseData.tax.brackets = {
+	base.tax.brackets = {
 		2017: {
 			fed: [
 				{start: 0, end: 45916, rate: 0.15},
@@ -49,7 +52,7 @@ window.app.baseData = window.app.baseData || {};
 		}
 	}
 
-	baseData.tax.credits = {
+	base.tax.credits = {
 		2017: {
 			fed: {
 				personal: 11635,
@@ -76,7 +79,7 @@ window.app.baseData = window.app.baseData || {};
 		}
 	}
 
-	baseData.tax.specials = {
+	base.tax.specials = {
 		2017: {
 			fed: {
 				employmentAmount: 1177
@@ -104,12 +107,12 @@ window.app.baseData = window.app.baseData || {};
 		}
 	}
 
-	baseData.ympe = {
+	base.ympe = {
 		2016: 54900,
 		2017: 55300		
 	}
 
-	baseData.limits = {
+	base.limits = {
 		rrsp: {
 			2017: 26010
 		},
@@ -128,7 +131,7 @@ window.app.baseData = window.app.baseData || {};
 			2017: 5500
 		}
 	}
-	baseData.incomeFund = {
+	base.incomeFund = {
 		getMin: (age) => {
 			if (!Number.isInteger(age)) throw new TypeError();
 			if (age < 55) {
@@ -241,5 +244,7 @@ window.app.baseData = window.app.baseData || {};
 			return max[jurisdiction]();			
 		}
 	}
+
+	return base;
 
 })();
